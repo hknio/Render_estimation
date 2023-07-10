@@ -1,0 +1,309 @@
+{
+  "version": "0.1.0",
+  "name": "burn_rewards",
+  "instructions": [
+    {
+      "name": "initializeBurnRewardsV0",
+      "accounts": [
+        {
+          "name": "burnRewards",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "emissionSchedule",
+          "isMut": false,
+          "isSigner": false,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "type": "string",
+                "value": "emission_schedule"
+              },
+              {
+                "kind": "account",
+                "type": "publicKey",
+                "account": "Mint",
+                "path": "rndr_mint"
+              }
+            ],
+            "programId": {
+              "kind": "account",
+              "type": "publicKey",
+              "path": "emission_schedule_program"
+            }
+          }
+        },
+        {
+          "name": "emissionScheduleProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "to",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "escrow",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "thread",
+          "isMut": true,
+          "isSigner": false,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "type": "string",
+                "value": "thread"
+              },
+              {
+                "kind": "account",
+                "type": "publicKey",
+                "account": "BurnRewardsV0",
+                "path": "burn_rewards"
+              },
+              {
+                "kind": "const",
+                "type": "string",
+                "value": "receive_rewards"
+              }
+            ],
+            "programId": {
+              "kind": "account",
+              "type": "publicKey",
+              "path": "clockwork"
+            }
+          }
+        },
+        {
+          "name": "clockwork",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rndrMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "args",
+          "type": {
+            "defined": "InitializeBurnRewardsArgsV0"
+          }
+        }
+      ]
+    },
+    {
+      "name": "distributeBurnRewardsV0",
+      "accounts": [
+        {
+          "name": "burnRewards",
+          "isMut": true,
+          "isSigner": false,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "type": "string",
+                "value": "burn_rewards"
+              },
+              {
+                "kind": "account",
+                "type": "publicKey",
+                "path": "owner"
+              }
+            ]
+          }
+        },
+        {
+          "name": "to",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "escrow",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "rndrMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "emissionSchedule",
+          "isMut": false,
+          "isSigner": false,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "type": "string",
+                "value": "emission_schedule"
+              },
+              {
+                "kind": "account",
+                "type": "publicKey",
+                "path": "owner"
+              }
+            ],
+            "programId": {
+              "kind": "account",
+              "type": "publicKey",
+              "path": "emission_schedule_program"
+            }
+          }
+        },
+        {
+          "name": "emissionScheduleProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "thread",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        }
+      ],
+      "args": [],
+      "returns": {
+        "defined": "clockwork_sdk::state::ThreadResponse"
+      }
+    }
+  ],
+  "accounts": [
+    {
+      "name": "BurnRewardsV0",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "publicKey"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "rewardsPerEpoch",
+            "type": {
+              "vec": {
+                "defined": "RewardsItem"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "name": "DistributeBurnRewardsArgsV0",
+      "type": {
+        "kind": "struct",
+        "fields": []
+      }
+    },
+    {
+      "name": "InitializeBurnRewardsArgsV0",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "publicKey"
+          },
+          {
+            "name": "schedule",
+            "type": {
+              "option": "string"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "RewardsItem",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "startUnixTime",
+            "type": "i64"
+          },
+          {
+            "name": "rcBurned",
+            "type": "u64"
+          },
+          {
+            "name": "rewardsClaimed",
+            "type": "u64"
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "MissingBurnRewards",
+      "msg": "No burn rewards found"
+    },
+    {
+      "code": 6001,
+      "name": "MissingEmissionSchedule",
+      "msg": "No emission schedule found"
+    },
+    {
+      "code": 6002,
+      "name": "BurnRewardsClaimed",
+      "msg": "Burn rewards already claimed"
+    }
+  ],
+  "metadata": {
+    "address": "burnUzpV6LSPZFU8qBuj2yd5SdXGBFuYRn4cgmh3cue"
+  }
+}

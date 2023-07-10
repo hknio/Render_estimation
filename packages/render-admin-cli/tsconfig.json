@@ -1,0 +1,33 @@
+{
+  "extends": "../../tsconfig.root.json",
+  "references": [
+    {
+      "path": "../spl-utils"
+    },
+    {
+      "path": "../idls"
+    },
+    {
+      "path": "../circuit-breaker-sdk"
+    },
+    /*{
+      "path": "../lazy-distributor-sdk"
+    },*/
+    /*{
+      "path": "../price-oracle-sdk"
+    },
+    {
+      "path": "../rewards-oracle-sdk"
+    },*/
+    {
+      "path": "./tsconfig.cjs.json"
+    },
+    {
+      "path": "./tsconfig.esm.json"
+    }
+  ],
+  "compilerOptions": {
+    "module": "commonjs",
+    "isolatedModules": false
+  }
+}

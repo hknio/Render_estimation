@@ -1,0 +1,24 @@
+# Anchor
+.anchor
+.DS_Store
+target
+**/*.rs.bk
+
+# Clockwork
+bin/
+lib/
+
+# Docker
+docker-target
+
+# Solana
+.DS_Store
+**/node_modules
+**/dist
+**/build
+**/target
+**/test-ledger
+**/tsconfig.tsbuildinfo
+*.diff
+**/keypair.json
+**/*.log

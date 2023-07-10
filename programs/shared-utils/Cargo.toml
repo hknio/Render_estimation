@@ -1,0 +1,31 @@
+[package]
+name = "shared-utils"
+version = "0.0.1"
+description = "Created with Anchor"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "shared_utils"
+
+[features]
+devnet = []
+no-genesis = []
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+cpi = ["no-entrypoint"]
+default = []
+
+[profile.release]
+overflow-checks = true
+
+[dependencies]
+#anchor-spl = { git = "https://github.com/coral-xyz/anchor", features = ["metadata"] }
+anchor-lang = {  version = "0.26.0", features = ["init-if-needed"] }
+anchor-spl = { version = "0.26.0", features = ["metadata"] }
+spl-account-compression = { git = "https://github.com/ChewingGlass/solana-program-library", branch = "feature/anchor-26", version="0.1.5", features = ["cpi"] }
+uint = "0.9"
+# path = "../../deps/metaplex-program-library/token-metadata/program"
+mpl-token-metadata = { version = "=1.9.0", features = ["no-entrypoint"] }
+mpl-bubblegum = {path = "../../deps/metaplex-program-library/bubblegum/program", features = ["cpi"]}

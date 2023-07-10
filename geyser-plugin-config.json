@@ -1,0 +1,7 @@
+{
+  "libpath": "~/.config/clockwork/localnet/runtime_deps/v2.0.17/libclockwork_plugin.so",
+  "keypath": "./clockwork-worker-keypair.json",
+  "rpc_url": "http://127.0.0.1:8899",
+  "transaction_timeout_threshold": 150,
+  "thread_count": 10,
+}

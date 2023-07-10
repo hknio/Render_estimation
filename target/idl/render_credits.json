@@ -1,0 +1,606 @@
+{
+  "version": "0.1.2",
+  "name": "render_credits",
+  "instructions": [
+    {
+      "name": "initializeRenderCreditsV0",
+      "accounts": [
+        {
+          "name": "renderCredits",
+          "isMut": true,
+          "isSigner": false,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "type": "string",
+                "value": "rc"
+              },
+              {
+                "kind": "account",
+                "type": "publicKey",
+                "account": "Mint",
+                "path": "rc_mint"
+              }
+            ]
+          }
+        },
+        {
+          "name": "rndrPriceOracle",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rndrMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "circuitBreaker",
+          "isMut": true,
+          "isSigner": false,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "type": "string",
+                "value": "mint_windowed_breaker"
+              },
+              {
+                "kind": "account",
+                "type": "publicKey",
+                "account": "Mint",
+                "path": "rc_mint"
+              }
+            ],
+            "programId": {
+              "kind": "account",
+              "type": "publicKey",
+              "path": "circuit_breaker_program"
+            }
+          }
+        },
+        {
+          "name": "rcMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "mintAuthority",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "freezeAuthority",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "accountPayer",
+          "isMut": true,
+          "isSigner": false,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "type": "string",
+                "value": "account_payer"
+              }
+            ]
+          }
+        },
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "circuitBreakerProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "args",
+          "type": {
+            "defined": "InitializeRenderCreditsArgsV0"
+          }
+        }
+      ]
+    },
+    {
+      "name": "mintRenderCreditsV0",
+      "accounts": [
+        {
+          "name": "renderCredits",
+          "isMut": false,
+          "isSigner": false,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "type": "string",
+                "value": "rc"
+              },
+              {
+                "kind": "account",
+                "type": "publicKey",
+                "account": "Mint",
+                "path": "rc_mint"
+              }
+            ]
+          },
+          "relations": [
+            "rndr_mint",
+            "rc_mint",
+            "rndr_price_oracle"
+          ]
+        },
+        {
+          "name": "rndrPriceOracle",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "burner",
+          "isMut": true,
+          "isSigner": false,
+          "relations": [
+            "owner"
+          ]
+        },
+        {
+          "name": "recipientTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "recipient",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "rndrMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "rcMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "circuitBreaker",
+          "isMut": true,
+          "isSigner": false,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "type": "string",
+                "value": "mint_windowed_breaker"
+              },
+              {
+                "kind": "account",
+                "type": "publicKey",
+                "account": "Mint",
+                "path": "rc_mint"
+              }
+            ],
+            "programId": {
+              "kind": "account",
+              "type": "publicKey",
+              "path": "circuit_breaker_program"
+            }
+          }
+        },
+        {
+          "name": "circuitBreakerProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "args",
+          "type": {
+            "defined": "MintRenderCreditsArgsV0"
+          }
+        }
+      ]
+    },
+    {
+      "name": "burnRenderCreditsV0",
+      "accounts": [
+        {
+          "name": "renderCredits",
+          "isMut": false,
+          "isSigner": false,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "type": "string",
+                "value": "rc"
+              },
+              {
+                "kind": "account",
+                "type": "publicKey",
+                "account": "Mint",
+                "path": "rc_mint"
+              }
+            ]
+          },
+          "relations": [
+            "rc_mint"
+          ]
+        },
+        {
+          "name": "burnRewards",
+          "isMut": true,
+          "isSigner": false,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "type": "string",
+                "value": "burn_rewards"
+              },
+              {
+                "kind": "account",
+                "type": "publicKey",
+                "path": "owner"
+              }
+            ],
+            "programId": {
+              "kind": "account",
+              "type": "publicKey",
+              "path": "burn_rewards_program"
+            }
+          }
+        },
+        {
+          "name": "burnRewardsProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "emissionSchedule",
+          "isMut": true,
+          "isSigner": false,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "type": "string",
+                "value": "emission_schedule"
+              },
+              {
+                "kind": "account",
+                "type": "publicKey",
+                "account": "Mint",
+                "path": "rndr_mint"
+              }
+            ],
+            "programId": {
+              "kind": "account",
+              "type": "publicKey",
+              "path": "emission_schedule_program"
+            }
+          }
+        },
+        {
+          "name": "emissionScheduleProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "burner",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "rcMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "rndrMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "args",
+          "type": {
+            "defined": "BurnRenderCreditsArgsV0"
+          }
+        }
+      ]
+    },
+    {
+      "name": "updateRenderCreditsV0",
+      "accounts": [
+        {
+          "name": "renderCredits",
+          "isMut": true,
+          "isSigner": false,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "type": "string",
+                "value": "rc"
+              },
+              {
+                "kind": "account",
+                "type": "publicKey",
+                "account": "Mint",
+                "path": "rc_mint"
+              }
+            ]
+          },
+          "relations": [
+            "authority"
+          ]
+        },
+        {
+          "name": "rcMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "authority",
+          "isMut": false,
+          "isSigner": true
+        }
+      ],
+      "args": [
+        {
+          "name": "args",
+          "type": {
+            "defined": "UpdateRenderCreditsArgsV0"
+          }
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "RenderCreditsV0",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "rcMint",
+            "type": "publicKey"
+          },
+          {
+            "name": "rndrMint",
+            "type": "publicKey"
+          },
+          {
+            "name": "authority",
+            "type": "publicKey"
+          },
+          {
+            "name": "rndrPriceOracle",
+            "type": "publicKey"
+          },
+          {
+            "name": "renderCreditsBump",
+            "type": "u8"
+          },
+          {
+            "name": "accountPayer",
+            "type": "publicKey"
+          },
+          {
+            "name": "accountPayerBump",
+            "type": "u8"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "name": "WindowedCircuitBreakerConfigV0",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "windowSizeSeconds",
+            "type": "u64"
+          },
+          {
+            "name": "thresholdType",
+            "type": {
+              "defined": "ThresholdType"
+            }
+          },
+          {
+            "name": "threshold",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "BurnRenderCreditsArgsV0",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "amount",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "InitializeRenderCreditsArgsV0",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "publicKey"
+          },
+          {
+            "name": "config",
+            "type": {
+              "defined": "WindowedCircuitBreakerConfigV0"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "MintRenderCreditsArgsV0",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "rndrAmount",
+            "type": {
+              "option": "u64"
+            }
+          },
+          {
+            "name": "rcAmount",
+            "type": {
+              "option": "u64"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "UpdateRenderCreditsArgsV0",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "newAuthority",
+            "type": {
+              "option": "publicKey"
+            }
+          },
+          {
+            "name": "rndrPriceOracle",
+            "type": {
+              "option": "publicKey"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "ThresholdType",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Percent"
+          },
+          {
+            "name": "Absolute"
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "BumpNotAvailable",
+      "msg": "Bump couldn't be found"
+    },
+    {
+      "code": 6001,
+      "name": "PythError",
+      "msg": "Error loading Pyth data"
+    },
+    {
+      "code": 6002,
+      "name": "PythPriceNotFound",
+      "msg": "Pyth price is not available"
+    },
+    {
+      "code": 6003,
+      "name": "PythPriceFeedStale",
+      "msg": "Pyth price is stale"
+    },
+    {
+      "code": 6004,
+      "name": "ArithmeticError",
+      "msg": "Arithmetic error"
+    },
+    {
+      "code": 6005,
+      "name": "InvalidArgs",
+      "msg": "Invalid arguments"
+    },
+    {
+      "code": 6006,
+      "name": "NoGenesis",
+      "msg": "Genesis endpoints are currently disabled"
+    }
+  ],
+  "metadata": {
+    "address": "cred9X51LcyZgyDrJt3CmsLc1Y6v7kjyXbUL4VUJMjz"
+  }
+}

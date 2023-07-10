@@ -1,0 +1,158 @@
+{
+  "version": "0.1.0",
+  "name": "emission_schedule",
+  "instructions": [
+    {
+      "name": "initializeEmissionScheduleV0",
+      "accounts": [
+        {
+          "name": "schedule",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "rndrMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "args",
+          "type": {
+            "defined": "InitializeEmissionScheduleArgsV0"
+          }
+        }
+      ]
+    },
+    {
+      "name": "updateEmissionScheduleV0",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "schedule",
+          "isMut": true,
+          "isSigner": false,
+          "relations": [
+            "authority"
+          ]
+        }
+      ],
+      "args": [
+        {
+          "name": "args",
+          "type": {
+            "defined": "UpdateEmissionScheduleArgsV0"
+          }
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "EmissionSchedule",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "publicKey"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "emissionSchedule",
+            "type": {
+              "vec": {
+                "defined": "EmissionScheduleItem"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "name": "InitializeEmissionScheduleArgsV0",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "publicKey"
+          },
+          {
+            "name": "emissionSchedule",
+            "type": {
+              "vec": {
+                "defined": "EmissionScheduleItem"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "UpdateEmissionScheduleArgsV0",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "emissionSchedule",
+            "type": {
+              "option": {
+                "vec": {
+                  "defined": "EmissionScheduleItem"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "EmissionScheduleItem",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "startUnixTime",
+            "type": "i64"
+          },
+          {
+            "name": "emissionsPerEpoch",
+            "type": "u64"
+          },
+          {
+            "name": "emitted",
+            "type": "bool"
+          },
+          {
+            "name": "totalRcBurned",
+            "type": "u64"
+          }
+        ]
+      }
+    }
+  ],
+  "metadata": {
+    "address": "schdGUo2ZH1WmqxdB8ufmpAzij4FpPBa2Yzeq25HBX5"
+  }
+}

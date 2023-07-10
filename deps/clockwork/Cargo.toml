@@ -1,0 +1,11 @@
+[workspace]
+members = [
+    "cli",
+    "client",
+    "cron",
+    "macros",
+    "plugin",
+    "programs/*",
+    "sdk",
+    "utils"
+]

@@ -1,0 +1,33 @@
+[package]
+name = "render-credits"
+version = "0.1.2"
+description = "Created with Anchor"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "render_credits"
+
+[features]
+devnet = []
+no-genesis = []
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+cpi = ["no-entrypoint"]
+default = []
+
+[profile.release]
+overflow-checks = true
+
+[dependencies]
+anchor-lang = { version="0.26.0", features = ["init-if-needed"] }
+anchor-spl = "0.26.0"
+#clockwork-sdk = { version = "~2.0.1" }
+clockwork-sdk = { git = "https://github.com/clockwork-xyz/clockwork", version="2.0.1", rev="781b42fd06f2926899597ce5ea1f19b8ecd3d2e4" }
+#clockwork-thread-program = {path = "../../deps/clockwork/programs/thread"}
+circuit-breaker = { path = "../circuit-breaker", features = ["cpi"] }
+emission-schedule = { path = "../emission-schedule", features = ["cpi"] }
+burn-rewards = { path = "../burn-rewards", features = ["cpi"] }
+pyth-sdk-solana = { version = "0.7.0" }
+shared-utils = { path = "../shared-utils" }

@@ -1,0 +1,23 @@
+[package]
+name = "burn-rewards"
+version = "0.1.0"
+description = "Created with Anchor"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "burn_rewards"
+
+[features]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+cpi = ["no-entrypoint"]
+default = []
+
+[dependencies]
+anchor-lang = {  version = "0.26.0", features = ["init-if-needed"] }
+anchor-spl = "0.26.0"
+clockwork-sdk = { git = "https://github.com/clockwork-xyz/clockwork", version="2.0.1", rev="781b42fd06f2926899597ce5ea1f19b8ecd3d2e4" }
+emission-schedule = { path = "../emission-schedule", features = ["cpi"] }
+

@@ -1,0 +1,29 @@
+{
+  "extends": "./tsconfig.root.json",
+  "references": [
+    {
+      "path": "./packages/idls"
+    },
+    {
+      "path": "./packages/spl-utils"
+    },
+    {
+      "path": "./packages/emission-distributor-sdk"
+    },
+    {
+      "path": "./packages/circuit-breaker-sdk"
+    },
+    /*{
+      "path": "./packages/price-oracle-sdk"
+    },*/
+    {
+      "path": "./packages/render-admin-cli"
+    },
+    {
+      "path": "./packages/render-credits-sdk"
+    },
+    {
+      "path": "./packages/bridge-sdk"
+    }
+  ]
+}
